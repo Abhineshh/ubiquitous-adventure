@@ -1,41 +1,18 @@
-import { useRef, useState } from 'react'
-import './App.css'
-import axios from 'axios'
-import Navbar from './components/Navbar'
-import TableOutput from './components/TableOutput'
-import CompanyDetails from './components/CompanyDetails'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Application from './pages/Application'
+import Login from './pages/Login'
+import Register from './pages/Register'
+
 
 function App() {
-  const [selectedCompany, setSelectedCompany] = useState(null)
-  const [tableData, settableData] = useState()
-
-  const fetchData = async (query) => {
-    try {
-      const response = await axios.get("https://financialm    sfasdasdfodelingprep.com/api/v3/stock-screener?apikey={YOUR API KEY}&country=US")
-      settableData(response.data)
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  function handleCompanyClick(company) {
-    setSelectedCompany(company)
-  }
-
   return (
     <>
-      <div className='h-screen w-screen'>
-        <Navbar />
-        {
-          selectedCompany != null ? (
-            <CompanyDetails company={selectedCompany} onClose={() => { setSelectedCompany(null) }} />
-          ) : (
-            <div>
-              <TableOutput handleClick={(data) => { handleCompanyClick(data) }} handleFetch={(query) => { fetchData(query) }} tableData={tableData} />
-            </div>
-          )
-        }
-      </div>
+      <Routes>
+        <Route path='/' element={<Application />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
     </>
   )
 }
