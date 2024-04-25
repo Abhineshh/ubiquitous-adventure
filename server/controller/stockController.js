@@ -15,51 +15,41 @@ module.exports.fetchStock = async (req, res, next) => {
         }
         const userId = currentUser._id;
 
-        let {
+        const {
             marketCapitalUL,
-            marketCapitalLL,
-            sector,
             industry,
             priceUL,
-            priceLL,
             dividendUL,
-            dividendLL,
             volumeUL,
-            volumeLL,
             exchange,
             country
         } = req.query.query;
 
-        console.log(typeof (volumeLL))
-
-        // Convert string values to their respective types
+                
         const newData = new Stocks({
             marketCapitalUL: parseFloat(marketCapitalUL),
-            marketCapitalLL: parseFloat(marketCapitalLL),
-            sector,
             industry,
-            priceUL: parseFloat(priceUL),
-            priceLL: parseFloat(priceLL),
-            dividendUL: parseFloat(dividendUL),
-            dividendLL: parseFloat(dividendLL),
-            volumeUL: parseFloat(volumeUL),
-            volumeLL: parseFloat(volumeLL),
+            priceUL,
+            dividendUL,
+            volumeUL,
             exchange,
             country,
             user: userId
         });
-        console.log(`${fmpURL}?apikey=${apiKey}&country=${country}&exchange=NASDAQ&industry=Software&marketCapMoreThan=${marketCapitalLL}&marketCapLowerThan=${marketCapitalUL}&sector=${sector}&priceMoreThan=${priceLL}&priceLowerThan${priceUL}&dividendMoreThan${dividendLL}&dividendLowerThan${dividendUL}&volumeMoreThan=${volumeLL}&volumeLowerThan=${volumeUL}`)
+        
         await newData.save();
-        let NASDAQ = "NASDAQ"
-        let UN = "UN"
-        console.log(typeof (parseFloat(marketCapitalLL)), marketCapitalLL, "dafdadsfasdf")
-        // Ensure that the numeric values are passed as numbers to the API endpoint
-        const response = await axios.get(`${fmpURL}?apikey=${apiKey}&country=${country}&exchange=NASDAQ&industry=software
-                            &marketCapMoreThan=${marketCapitalLL}&marketCapLowerThan=${marketCapitalUL}&sector=${sector}
-                            &priceMoreThan=${priceLL}&priceLowerThan${priceUL}&dividendMoreThan${dividendLL}&dividendLowerThan${dividendUL}
-                            &volumeMoreThan=${volumeLL}&volumeLowerThan=${volumeUL}`);
-       
-    console.log(response.data)
+        
+        const response = await axios.get(fmpURL,{
+            params:{
+                apikey:apiKey,
+                industry,
+                country,
+                exchange,
+                marketCapLowerThan:marketCapitalUL,
+                dividendLowerThan:dividendUL,
+                priceLowerThan:priceUL
+            }
+        })
         res.json(response.data);
     } catch (err) {
         next(err);

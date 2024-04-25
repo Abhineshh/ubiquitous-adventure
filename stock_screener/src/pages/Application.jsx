@@ -12,7 +12,7 @@ function Application() {
     username:"",
     password:"",
   });
-  const [tableData, settableData] = useState()
+  const [tableData, settableData] = useState([])
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -54,7 +54,7 @@ function Application() {
       <div className='h-screen w-screen'>
         <Navbar userData={currentUser} />
         <div>
-          <TableOutput  handleFetch={(query) => { fetchData(query) }} tableData={tableData} />
+          <TableOutput  handleFetch={(query) => { fetchData(query) }} tableData={tableData}  />
         </div>
       </div>
     </>

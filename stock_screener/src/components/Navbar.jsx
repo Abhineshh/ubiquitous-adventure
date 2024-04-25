@@ -30,7 +30,7 @@ function Navbar(props) {
         userData &&
           <div className='flex flex-wrap'>
             <p className='m-2 text-indigo-600 font-extrabold text-3xl md:text-xl p-2'>{userData.username}</p>
-            <button onClick={() => { handleClick() }} className='m-2 border-2 bg-indigo-600 text-white p-2 hover:bg-indigo-900 active:bg-red-600 text-base sm:text-3xl '>LogOut</button>
+            <button onClick={() => { handleClick() }} className='m-2 border-2 bg-indigo-600 text-white p-2 hover:bg-indigo-900 active:bg-red-600 text-base '>LogOut</button>
           </div>
         
       }

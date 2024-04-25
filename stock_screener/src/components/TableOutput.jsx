@@ -5,12 +5,14 @@ function TableOutput(props) {
 
   const {handleFetch,tableData} = props
 
+  
+
   return (
     <>
     <ScreeningInput applyFunc={(query)=>{handleFetch(query)}}/>
     <div className=' bg-white flex justify-center px-10'>
       {
-        tableData ? (
+        tableData && (tableData.length > 1) ? (
 
           <table className=' border-2 border-solid border-slate-400 text-xs'>
             <thead className='bg-slate-400'>

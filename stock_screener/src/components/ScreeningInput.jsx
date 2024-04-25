@@ -6,15 +6,10 @@ function ScreeningInput(props) {
 
   const [query, setquery] = useState({
     marketCapitalUL: 0,
-    marketCapitalLL: 0,
-    sector: "",
     industry: "",
     priceUL: 0,
-    priceLL: 0,
     dividendUL: 0,
-    dividendLL: 0,
     volumeUL: 0,
-    volumeLL: 0,
     exchange: "",
     country: "",
   })
@@ -26,14 +21,14 @@ function ScreeningInput(props) {
   }
 
   const validateAndApply = () => {
-    const requiredFields = ['sector', 'industry', 'exchange', 'country'];
+    const requiredFields = [ 'industry', 'exchange', 'country'];
     const emptyFields = requiredFields.filter(field => !query[field]);
     if (emptyFields.length > 0) {
       toast.error('Please fill in all required fields.');
       return;
     }
 
-    const numericFields = ['marketCapitalUL', 'marketCapitalLL', 'priceUL', 'priceLL', 'dividendUL', 'dividendLL', 'volumeUL', 'volumeLL'];
+    const numericFields = ['marketCapitalUL', 'priceUL', 'dividendUL', 'volumeUL'];
     const invalidNumericFields = numericFields.filter(field => isNaN(query[field]));
     if (invalidNumericFields.length > 0) {
       toast.error('Market capital, price, dividend, and volume fields must be numeric.');
@@ -44,33 +39,36 @@ function ScreeningInput(props) {
 
   };
 
-  const sectorOptions = [
-    "Technology",
-    "Automobile",
-    "Biology",
-    "Aeronautical",
-    "Space",
-    "Aquatic",
-  ];
 
   const industryOptions = [
     "Technology",
     "Automobile",
-    "Software - INfrastructure"
-    // Add more options as needed
-  ];
+    "Software",
+    "Autos",
+    "Banks",
+    "Beverages",
+    "Semiconductors",
+    "Electronics",
+    "Internet",
+    "Insurance"
+    ];
 
   const exchangeOptions = [
-    "nse",
-    "bse",
-    "NASDAQ Global Select",
-    // Add more options as needed
+    "NSE",
+    "BSE",
+    "NASDAQ",
+    "AMEX",
+    "EURONEXT",
+    "NYSE",
   ];
 
   const countryOptions = [
     "IN",
     "US",
-    // Add more options as needed
+    "UK",
+    "MX",
+    "BR",
+    "RU",
   ];
 
   return (
@@ -78,16 +76,6 @@ function ScreeningInput(props) {
       <ToastContainer />
       <div className='flex flex-wrap justify-center items-center'>
 
-        <div className='m-2 items-center flex flex-col'>
-          <label>Sector</label>
-          <select name="sector" value={query.sector} onChange={handleChange} className='bg-transparent p-1 border-2  text-base focus:border-2 focus:outline-none'>
-            <option value="">Select...</option>
-            {sectorOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
-
-        </div>
 
         <div className='m-2 items-center flex flex-col'>
           <label>Industry</label>
@@ -122,16 +110,6 @@ function ScreeningInput(props) {
         <div className='m-2 flex flex-col '>
           <label className='text-center'>Market Capital</label>
           <div>
-            <label>MoreThan:</label>
-            <input
-              name='marketCapitalLL'
-              type='number'
-              onChange={(e) => handleChange(e)}
-              className='bg-transparent p-1 border-2  text-base focus:border-2 focus:outline-none'
-              placeholder='eg:1000' />
-          </div>
-          <div>
-            <label>LessThan:</label>
             <input
               name='marketCapitalUL'
               type='number'
@@ -144,16 +122,6 @@ function ScreeningInput(props) {
         <div className='m-2 items-center flex flex-col'>
           <label className='text-center'>price per Stock</label>
           <div>
-            <label>MoreThan:</label>
-            <input
-              name='priceLL'
-              type='number'
-              onChange={(e) => handleChange(e)}
-              className='bg-transparent p-1 border-2  text-base focus:border-2 focus:outline-none'
-              placeholder='eg:1000' />
-          </div>
-          <div>
-            <label>LessThan:</label>
             <input
               name='priceUL'
               type='number'
@@ -164,18 +132,8 @@ function ScreeningInput(props) {
         </div>
 
         <div className='m-2 flex flex-col'>
-          <label className='text-center'>dividend</label>
+          <label className='text-center'>Dividend</label>
           <div>
-            <label>MoreThan:</label>
-            <input
-              name='dividendLL'
-              type='number'
-              onChange={(e) => handleChange(e)}
-              className='bg-transparent p-1 border-2  text-base focus:border-2 focus:outline-none'
-              placeholder='eg:1000' />
-          </div>
-          <div>
-            <label>LessThan:</label>
             <input
               name='dividendUL'
               type='number'
@@ -188,16 +146,6 @@ function ScreeningInput(props) {
         <div className='m-2 flex flex-col'>
           <label className='text-center'>Volume</label>
           <div>
-            <label>MoreThan:</label>
-            <input
-              name='volumeLL'
-              type='number'
-              onChange={(e) => handleChange(e)}
-              className='bg-transparent p-1 border-2 text-base focus:border-2 focus:outline-none'
-              placeholder='eg:1000' />
-          </div>
-          <div>
-            <label>LessThan:</label>
             <input
               name='volumeUL'
               type='number'

@@ -86,7 +86,7 @@ function Register() {
 
   return (
     <>
-      <div className=' h-fit w-screen flex flex-col justify-center gap-4 items-center bg-white pt-3 pb-3 '>
+      <div className=' h-fit w-screen flex flex-col justify-center gap-4 items-center bg-white  '>
 
         <form onSubmit={(event)=>handleSubmit(event)} className='flex flex-col gap-8 bg-slate-400 p-20 min-w-max h-full pt-12  border-2'>
           <div className='flex items-center g-4 justify-center'>

@@ -63,7 +63,7 @@ function Login() {
 
   return (
     <>
-      <div className=' h-screen w-screen flex flex-col justify-center gap-4 items-center bg-white'>
+      <div className=' h-screen w-screen flex flex-col justify-center gap-4 items-center bg-white pt-0'>
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-8 bg-slate-400 p-20 min-w-max border-2 pt-12'>
           <div className='flex items-center g-4 justify-center'>
