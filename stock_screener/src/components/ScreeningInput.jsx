@@ -159,7 +159,6 @@ function ScreeningInput(props) {
       </div>
       <div className='flex flex-col items-center justify-center pb-5'>
         <button className='border-2 p-2 m-2 bg-indigo-700 active:bg-slate-400 hover:bg-red-600 ' onClick={() => { validateAndApply() }}>apply</button>
-        <p>(by default all companies will be fetched)</p>
       </div>
 
     </div>
